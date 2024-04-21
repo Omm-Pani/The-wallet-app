@@ -29,8 +29,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ommpani/user-payments-app:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=registry,ref=user/app:buildcache
+          cache-to: type=registry,ref=user/app:buildcache,mode=max
 
       - name: Verify Pushed Image
         run: docker pull ommpani/user-payments-app:latest
