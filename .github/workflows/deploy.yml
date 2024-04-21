@@ -29,6 +29,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ommpani/user-payments-app:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Verify Pushed Image
         run: docker pull ommpani/user-payments-app:latest
@@ -40,7 +42,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            sudo docker pull ommpani/user-payments-app:latest
+            sudo docker pull ommpani/user-payments-app:latest`
             sudo docker stop web-app || true
             sudo docker rm web-app || true
             sudo docker run -d --name web-app -p 3005:3000 ommpani/user-payments-app:latest
